@@ -1,0 +1,11 @@
+No Data Forwarding and No Hazard Detection are implemented:
+add t0, t1, t2
+nop
+nop
+sub t4, t0, t3
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+add t0, t1, t2
+sub t4, t0, t3
+Total: 6 cycles

@@ -1,0 +1,308 @@
+/*******************************************************************************************
+Input 1:
+add t0, t1, t2
+sub t4, t0, t3
+
+Output 1:
+No Data Forwarding and No Hazard Detection are implemented:
+add t0, t1, t2
+nop
+nop
+sub t4, t0, t3
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+add t0, t1, t2
+sub t4, t0, t3
+Total: 6 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 2:
+ld t0, 0(t2)
+sub t4, t0, t3
+
+Output 2:
+No Data Forwarding and No Hazard Detection are implemented:
+ld t0, 0(t2)
+nop
+nop
+sub t4, t0, t3
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+ld t0, 0(t2)
+nop
+sub t4, t0, t3
+Total: 7 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 3:
+and x1, x4, x5
+or1 x4, x1, 200
+ld x12, 0(x1)
+add x8, x12, x4
+xor x8, x8, x8
+xori x8, x8, 50
+sd x5, 160(x6)
+add x3, x3, x6
+ld x5, 0(x6)
+
+Output 3:
+No Data Forwarding and No Hazard Detection are implemented:
+and x1, x4, x5
+nop
+nop
+or1 x4, x1, 200
+ld x12, 0(x1)
+nop
+nop
+add x8, x12, x4
+nop
+nop
+xor x8, x8, x8
+nop
+nop
+xori x8, x8, 50
+sd x5, 160(x6)
+add x3, x3, x6
+ld x5, 0(x6)
+Total: 21 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+and x1, x4, x5
+or1 x4, x1, 200
+ld x12, 0(x1)
+nop
+add x8, x12, x4
+xor x8, x8, x8
+xori x8, x8, 50
+sd x5, 160(x6)
+add x3, x3, x6
+ld x5, 0(x6)
+Total: 14 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 4:
+sub x0, x4, x2
+and x10, zero, x4
+add x10, x0, x4
+
+Output 4:
+No Data Forwarding and No Hazard Detection are implemented:
+sub x0, x4, x2
+and x10, zero, x4
+add x10, x0, x4
+Total: 7 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+sub x0, x4, x2
+and x10, zero, x4
+add x10, x0, x4
+Total: 7 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 5:
+lw x2, 0(x10)
+or s11, x31, sp
+
+Output 5:
+No Data Forwarding and No Hazard Detection are implemented:
+lw x2, 0(x10)
+nop
+nop
+or s11, x31, sp
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+lw x2, 0(x10)
+nop
+or s11, x31, sp
+Total: 7 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 6:
+lw x14, 0(x10)
+sw x14, 48(x1)
+
+Output 6:
+No Data Forwarding and No Hazard Detection are implemented:
+lw x14, 0(x10)
+nop
+nop
+sw x14, 48(x1)
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+lw x14, 0(x10)
+sw x14, 48(x1)
+Total: 6 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 7:
+lw x14, 0(x10)
+sw x10, 48(x14)
+
+Output 7:
+No Data Forwarding and No Hazard Detection are implemented:
+lw x14, 0(x10)
+nop
+nop
+sw x10, 48(x14)
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+lw x14, 0(x10)
+nop
+sw x10, 48(x14)
+Total: 7 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 8:
+lw x14, 0(x10)
+sw x14, 48(x14)
+
+Output 8:
+No Data Forwarding and No Hazard Detection are implemented:
+lw x14, 0(x10)
+nop
+nop
+sw x14, 48(x14)
+Total: 8 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+lw x14, 0(x10)
+nop
+sw x14, 48(x14)
+Total: 7 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 9:
+ld t0, 0(t0)
+sd t0, 0(t0)
+add t0, t0, t0
+ld t0, 0(t0)
+sub x5, x5, t0
+sd t0, 0(t0)
+ld t0, 0(x5)
+ld t0, 0(t1)
+sd x5, 0(t0)
+
+Output 9:
+No Data Forwarding and No Hazard Detection are implemented:
+ld t0, 0(t0)
+nop
+nop
+sd t0, 0(t0)
+add t0, t0, t0
+nop
+nop
+ld t0, 0(t0)
+nop
+nop
+sub x5, x5, t0
+nop
+nop
+sd t0, 0(t0)
+ld t0, 0(x5)
+ld t0, 0(t1)
+nop
+nop
+sd x5, 0(t0)
+Total: 23 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+ld t0, 0(t0)
+nop
+sd t0, 0(t0)
+add t0, t0, t0
+ld t0, 0(t0)
+nop
+sub x5, x5, t0
+sd t0, 0(t0)
+ld t0, 0(x5)
+ld t0, 0(t1)
+nop
+sd x5, 0(t0)
+Total: 16 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 10:
+and x1, x31, t3
+add x8, ra, zero
+xor s0, x31, fp
+or t0, x31, x7
+srl t0, x31, fp
+
+Output 10:
+No Data Forwarding and No Hazard Detection are implemented:
+and x1, x31, t3
+nop
+nop
+add x8, ra, zero
+nop
+nop
+xor s0, x31, fp
+or t0, x31, x7
+nop
+srl t0, x31, fp
+Total: 14 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+and x1, x31, t3
+add x8, ra, zero
+xor s0, x31, fp
+or t0, x31, x7
+srl t0, x31, fp
+Total: 9 cycles
+********************************************************************************************/
+
+/*******************************************************************************************
+Input 11:
+ori x4, sp, 10 
+srl gp, s0, tp
+add ra, x3, tp
+sub t3, t6, s10
+sll s10, x1, x28
+or t4, gp, x26
+sh x29, 100(x26)
+
+Output 11:
+No Data Forwarding and No Hazard Detection are implemented:
+ori x4, sp, 10
+nop
+nop
+srl gp, s0, tp
+nop
+nop
+add ra, x3, tp
+sub t3, t6, s10
+nop
+nop
+sll s10, x1, x28
+nop
+nop
+or t4, gp, x26
+nop
+nop
+sh x29, 100(x26)
+Total: 21 cycles
+
+Data Forwarding and Hazard Detection are implemented:
+ori x4, sp, 10
+srl gp, s0, tp
+add ra, x3, tp
+sub t3, t6, s10
+sll s10, x1, x28
+or t4, gp, x26
+sh x29, 100(x26)
+Total: 11 cycles
+********************************************************************************************/
